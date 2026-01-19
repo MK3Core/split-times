@@ -10,7 +10,7 @@ export const racingSeries = {
     name: 'Formula 1',
     color: '#E10600',
     races: [
-      { name: 'Australian Grand Prix', location: 'Melbourne', dateTimeUTC: '2026-03-08T05:00:00Z', timezone: 'Australia/Melbourne' },
+      { name: 'Australian Grand Prix', location: 'Melbourne', dateTimeUTC: '2026-03-08T04:00:00Z', timezone: 'Australia/Melbourne' },
       { name: 'Chinese Grand Prix', location: 'Shanghai', dateTimeUTC: '2026-03-15T07:00:00Z', timezone: 'Asia/Shanghai' },
       { name: 'Japanese Grand Prix', location: 'Suzuka', dateTimeUTC: '2026-03-29T05:00:00Z', timezone: 'Asia/Tokyo' },
       { name: 'Bahrain Grand Prix', location: 'Sakhir', dateTimeUTC: '2026-04-12T15:00:00Z', timezone: 'Asia/Bahrain' },

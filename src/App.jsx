@@ -139,7 +139,7 @@ function App() {
               onClick={handleDownload}
               disabled={selectedSeries.length === 0}
             >
-              📅 Download Calendar (.ics)
+              📅 Download Calendar
             </button>
             
             <div className="download-info">
