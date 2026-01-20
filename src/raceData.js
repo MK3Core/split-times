@@ -1,8 +1,8 @@
 // 2026 race schedules with UTC times for all series
 // All times stored in UTC for proper timezone conversion
-// Last updated: January 19, 2026
 
-export const LAST_UPDATED = '2026-01-19T00:00:00Z';
+// Last Updated Time
+export const LAST_UPDATED = '2026-01-19T23:18:00-05:00';
 
 export const racingSeries = {
   f1: {

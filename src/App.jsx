@@ -79,11 +79,18 @@ function App() {
 
   const formatLastUpdated = () => {
     const date = new Date(LAST_UPDATED);
-    return date.toLocaleDateString('en-US', { 
+    const dateString = date.toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
-      day: 'numeric' 
+      day: 'numeric',
+      timeZone: userTimezone
     });
+    const timeString = date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZone: userTimezone
+    });
+    return `${dateString} at ${timeString}`;
   };
 
   return (
