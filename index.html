@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Global Racing Calendar</title>
+    <script>
+      // Apply theme immediately to prevent FOUC
+      (function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.classList.add('preload');
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -52,7 +52,6 @@ body {
   background: var(--bg-primary);
   min-height: 100vh;
   color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .App {
@@ -72,7 +71,6 @@ body {
   border-radius: 8px;
   padding: 0.75rem 1rem;
   cursor: pointer;
-  transition: all 0.2s;
   box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
@@ -104,7 +102,6 @@ body {
   text-align: center;
   border-bottom: 1px solid var(--border-primary);
   position: relative;
-  transition: background-color 0.3s ease;
 }
 
 [data-theme="dark"] .header::before {
@@ -129,7 +126,6 @@ body {
   margin-bottom: 0.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-  transition: color 0.3s ease;
 }
 
 .subtitle {
@@ -137,7 +133,6 @@ body {
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: 0.01em;
-  transition: color 0.3s ease;
 }
 
 /* Container */
@@ -162,7 +157,6 @@ body {
   height: fit-content;
   position: sticky;
   top: 2rem;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
   box-shadow: var(--shadow-sm);
 }
 
@@ -176,7 +170,6 @@ body {
   margin-bottom: 1rem;
   font-weight: 600;
   letter-spacing: 0.01em;
-  transition: color 0.3s ease;
 }
 
 [data-theme="dark"] .series-selector h2 {
@@ -199,7 +192,6 @@ body {
   cursor: pointer;
   padding: 0.75rem;
   border-radius: 8px;
-  transition: all 0.2s;
   position: relative;
   border: 1px solid transparent;
 }
@@ -226,7 +218,6 @@ body {
   border-radius: 4px;
   margin-right: 0.75rem;
   position: relative;
-  transition: all 0.2s;
   background: var(--bg-primary);
 }
 
@@ -267,14 +258,12 @@ body {
   color: var(--text-primary);
   font-weight: 500;
   letter-spacing: 0.005em;
-  transition: color 0.3s ease;
 }
 
 .timezone-selector {
   margin-bottom: 1.5rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border-primary);
-  transition: border-color 0.3s ease;
 }
 
 .timezone-label {
@@ -284,7 +273,6 @@ body {
   color: var(--text-primary);
   margin-bottom: 0.5rem;
   letter-spacing: 0.02em;
-  transition: color 0.3s ease;
 }
 
 [data-theme="dark"] .timezone-label {
@@ -302,7 +290,6 @@ body {
   color: var(--text-primary);
   background-color: var(--bg-primary);
   cursor: pointer;
-  transition: all 0.2s;
   font-family: inherit;
 }
 
@@ -335,7 +322,6 @@ body {
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
   box-shadow: var(--shadow-md);
   font-family: inherit;
   letter-spacing: 0.01em;
@@ -381,7 +367,6 @@ body {
   padding: 2rem;
   overflow-y: auto;
   box-shadow: var(--shadow-sm);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 [data-theme="dark"] .main-content {
@@ -419,7 +404,6 @@ body {
   margin-bottom: 1rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  transition: color 0.3s ease;
 }
 
 [data-theme="dark"] .month-header {
@@ -439,7 +423,6 @@ body {
   background: var(--bg-card);
   border-radius: 8px;
   padding: 1rem;
-  transition: all 0.2s;
   border: 1px solid var(--border-primary);
   position: relative;
   overflow: hidden;
@@ -458,7 +441,6 @@ body {
   height: 2px;
   background: var(--series-color);
   opacity: 0;
-  transition: opacity 0.2s;
 }
 
 .race-card:hover {
@@ -538,7 +520,6 @@ body {
   border-top: 1px solid var(--border-primary);
   font-size: 0.85rem;
   letter-spacing: 0.01em;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .footer p {
