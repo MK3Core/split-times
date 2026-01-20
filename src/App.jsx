@@ -101,8 +101,8 @@ function App() {
       </button>
 
       <header className="header">
-        <h1>🏁 Global Racing Calendar</h1>
-        <p className="subtitle">Your complete motorsport schedule in one place</p>
+        <h1>🏁 Split-Times Racing Calendar</h1>
+        <p className="subtitle">Major racing schedules, converted to your timezone, downloadable for your calendar.</p>
       </header>
 
       <div className="container">
