@@ -10,7 +10,7 @@ function App() {
   const [theme, setTheme] = useState(() => {
     // Check localStorage for saved theme preference
     const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'light';
+    return savedTheme || 'dark';
   });
 
   // Apply theme to document
