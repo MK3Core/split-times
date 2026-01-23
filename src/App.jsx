@@ -7,6 +7,7 @@ import './App.css';
 function App() {
   const [selectedSeries, setSelectedSeries] = useState(['f1', 'imsa', 'wec', 'wrc']);
   const [userTimezone, setUserTimezone] = useState(getUserTimezone());
+  const [currentTime, setCurrentTime] = useState(new Date());
   const [theme, setTheme] = useState(() => {
     // Check localStorage for saved theme preference
     const savedTheme = localStorage.getItem('theme');
@@ -19,8 +20,33 @@ function App() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000); // Update Every Minute
+
+    return () => clearInterval(interval);
+  }, []);
+
   const toggleTheme = () => {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
+  const getRaceStatus = (race) => {
+    const now = currentTime.getTime();
+    const startTime = new Date(race.dateTimeUTC).getTime();
+    const endTime = race.endDateTimeUTC
+      ? new Date(race.endDateTimeUTC).getTime()
+      : startTime + (3 * 60 * 60 * 1000);
+
+    const upcomingBefore = startTime - (12 * 60 * 60 * 1000);
+
+    if (now >= startTime && now <= endTime) {
+      return 'live';
+    } else if (now >= upcomingBefore && now < startTime) {
+      return 'upcoming';
+    }
+    return null;
   };
 
   const filteredRaces = useMemo(() => {
@@ -191,18 +217,32 @@ function App() {
                   <div className="races-grid">
                     {races.map((race, index) => {
                       const { date, time, isMultiDay } = formatRaceDateTime(race, userTimezone);
+                      const status = getRaceStatus(race);
                       return (
                         <div 
                           key={`${race.seriesId}-${index}`} 
                           className="race-card"
                           style={{ '--series-color': race.seriesColor }}
                         >
+                        <div className="race-card-header">
                           <div 
                             className="race-series-badge" 
                             style={{ backgroundColor: race.seriesColor }}
                           >
                             {race.seriesId.toUpperCase()}
                           </div>
+                          {status && (
+                            <div className={`${status}-badge`}>
+                              {status === 'live' && (
+                                <>
+                                  <span className="live-dot"></span>
+                                  LIVE
+                                </>
+                              )}
+                              {status === 'upcoming' && 'UPCOMING'}
+                            </div>
+                          )}
+                        </div>
                           <div className="race-details">
                             <div className="race-date">{date}</div>
                             <div className="race-time">🕐 {time}</div>

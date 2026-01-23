@@ -74,8 +74,9 @@ export const racingSeries = {
     name: 'FIA World Rally Championship',
     color: '#2A9D8F',
     races: [
-      { name: 'Rally Monte-Carlo', location: 'Monaco', dateTimeUTC: '2026-01-22T08:00:00Z', endDateTimeUTC: '2026-01-25T16:00:00Z', timezone: 'Europe/Monaco' }, // Multi-day event
+      { name: 'Rally Monte-Carlo', location: 'Monaco', dateTimeUTC: '2026-01-22T08:00:00Z', endDateTimeUTC: '2026-01-25T16:00:00Z', timezone: 'Europe/Monaco' },
       { name: 'Rally Sweden', location: 'Umeå', dateTimeUTC: '2026-02-12T08:00:00Z', endDateTimeUTC: '2026-02-15T16:00:00Z', timezone: 'Europe/Stockholm' },
+      // Testing Race { name: 'Rally Sweden', location: 'Umeå', dateTimeUTC: '2026-01-23T08:30:00Z', endDateTimeUTC: '2026-01-23T16:00:00Z', timezone: 'Europe/Stockholm' },
       { name: 'Safari Rally Kenya', location: 'Nairobi', dateTimeUTC: '2026-03-12T07:00:00Z', endDateTimeUTC: '2026-03-15T15:00:00Z', timezone: 'Africa/Nairobi' },
       { name: 'Rally Croatia', location: 'Rijeka', dateTimeUTC: '2026-04-09T08:00:00Z', endDateTimeUTC: '2026-04-12T16:00:00Z', timezone: 'Europe/Zagreb' },
       { name: 'Rally Islas Canarias', location: 'Gran Canaria', dateTimeUTC: '2026-04-23T10:00:00Z', endDateTimeUTC: '2026-04-26T18:00:00Z', timezone: 'Atlantic/Canary' },

@@ -17,6 +17,8 @@
   --accent-primary: #6366f1;
   --accent-secondary: #8b5cf6;
   --accent-hover: #4f46e5;
+  --live-color: #ef4444;
+  --upcoming-color: #84cc16;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08);
@@ -38,6 +40,8 @@
   --accent-primary: #29a352;
   --accent-secondary: #22874a;
   --accent-hover: #33c766;
+  --live-color: #ef4444;
+  --upcoming-color: #a3e635;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.7);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.8);
@@ -439,6 +443,13 @@ body {
   overflow: hidden;
 }
 
+.race-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
 [data-theme="dark"] .race-card {
   border-radius: 6px;
 }
@@ -475,10 +486,76 @@ body {
   color: white;
   font-size: 0.7rem;
   font-weight: 700;
-  margin-bottom: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   background-color: var(--series-color);
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  background-color: var(--live-color);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 10px var(--live-color), 0 0 20px var(--live-color);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+[data-theme="dark"] .live-badge {
+  color: #121212;
+  box-shadow: 0 0 15px var(--live-color), 0 0 30px var(--live-color), 0 0 45px var(--live-color);
+}
+
+.upcoming-badge {
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  background-color: var(--live-color);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+[data-theme="dark"] .upcoming-badge {
+  color: #121212;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: white;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+[data-theme="dark"] .live-dot {
+  background-color: #121212;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 [data-theme="dark"] .race-series-badge {
