@@ -7,6 +7,7 @@ import './App.css';
 function App() {
   const [selectedSeries, setSelectedSeries] = useState(['f1', 'imsa', 'wec', 'wrc']);
   const [userTimezone, setUserTimezone] = useState(getUserTimezone());
+  const [collapsedMonths, setCollapsedMonths] = useState(new Set());
   const [currentTime, setCurrentTime] = useState(new Date());
   const [theme, setTheme] = useState(() => {
     // Check localStorage for saved theme preference
@@ -32,6 +33,21 @@ function App() {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
+  const filteredRaces = useMemo(() => {
+    return getRacesBySeries(selectedSeries);
+  }, [selectedSeries]);
+
+  useEffect(() => {
+    const grouped = groupRacesByMonth();
+    const pastMonths = new Set();
+    Object.entries(grouped).forEach(([monthYear, races]) => {
+      if (isMonthPast(races)) {
+        pastMonths.add(monthYear);
+      }
+    });
+    setCollapsedMonths(pastMonths);
+  }, [filteredRaces, userTimezone]);
+
   const getRaceStatus = (race) => {
     const now = currentTime.getTime();
     const startTime = new Date(race.dateTimeUTC).getTime();
@@ -48,10 +64,6 @@ function App() {
     }
     return null;
   };
-
-  const filteredRaces = useMemo(() => {
-    return getRacesBySeries(selectedSeries);
-  }, [selectedSeries]);
 
   const toggleSeries = (seriesId) => {
     setSelectedSeries(prev => {
@@ -82,6 +94,28 @@ function App() {
       .toLowerCase();
     
     downloadICS(filteredRaces, `racing-calendar-${seriesNames}.ics`);
+  };
+
+  const toggleMonth = (monthYear) => {
+    setCollapsedMonths(prev => {
+      const next = new Set(prev);
+      if (next.has(monthYear)) {
+        next.delete(monthYear);
+      } else {
+        next.add(monthYear);
+      }
+      return next;
+    });
+  };
+
+  const isMonthPast = (races) => {
+    const now = new Date();
+    return races.every(race => {
+      const endTime = race.endDateTimeUTC
+        ? new Date(race.endDateTimeUTC)
+        : new Date(new Date(race.dateTimeUTC).getTime() + 3 * 60 * 60 * 1000); // +3 hours fallback
+      return endTime < now;
+    });
   };
 
   const groupRacesByMonth = () => {
@@ -210,52 +244,65 @@ function App() {
               <p>👈 Select racing series to view the schedule</p>
             </div>
           ) : (
+            <>
             <div className="races-container">
-              {Object.entries(racesByMonth).map(([monthYear, races]) => (
-                <div key={monthYear} className="month-section">
-                  <h3 className="month-header">{monthYear}</h3>
-                  <div className="races-grid">
-                    {races.map((race, index) => {
-                      const { date, time, isMultiDay } = formatRaceDateTime(race, userTimezone);
-                      const status = getRaceStatus(race);
-                      return (
-                        <div 
-                          key={`${race.seriesId}-${index}`} 
-                          className="race-card"
-                          style={{ '--series-color': race.seriesColor }}
-                        >
-                        <div className="race-card-header">
-                          <div 
-                            className="race-series-badge" 
-                            style={{ backgroundColor: race.seriesColor }}
-                          >
-                            {race.seriesId.toUpperCase()}
-                          </div>
-                          {status && (
-                            <div className={`${status}-badge`}>
-                              {status === 'live' && (
-                                <>
-                                  <span className="live-dot"></span>
-                                  LIVE
-                                </>
-                              )}
-                              {status === 'upcoming' && 'UPCOMING'}
-                            </div>
-                          )}
-                        </div>
-                          <div className="race-details">
-                            <div className="race-date">{date}</div>
-                            <div className="race-time">🕐 {time}</div>
-                            <div className="race-name">{race.name}</div>
-                            <div className="race-location">📍 {race.location}</div>
-                          </div>
-                        </div>
-                      );
-                    })}
+  {Object.entries(racesByMonth).map(([monthYear, races]) => {
+    const isCollapsed = collapsedMonths.has(monthYear);
+    const isPast = isMonthPast(races);
+    return (
+      <div key={monthYear} className={`month-section ${isPast ? 'month-past' : ''}`}>
+        <h3
+          className={`month-header ${isPast ? 'month-header-past' : ''}`}
+          onClick={() => toggleMonth(monthYear)}
+        >
+          <span>{monthYear}</span>
+          <span className="month-toggle-icon">{isCollapsed ? '▸' : '▾'}</span>
+        </h3>
+        {!isCollapsed && (
+          <div className="races-grid">
+            {races.map((race, index) => {
+              const { date, time, isMultiDay } = formatRaceDateTime(race, userTimezone);
+              const raceStatus = getRaceStatus(race);
+              return (
+                <div
+                  key={`${race.seriesId}-${index}`}
+                  className="race-card"
+                  style={{ '--series-color': race.seriesColor }}
+                >
+                  <div className="race-card-header">
+                    <div
+                      className="race-series-badge"
+                      style={{ backgroundColor: race.seriesColor }}
+                    >
+                      {race.seriesId.toUpperCase()}
+                    </div>
+                    {raceStatus === 'live' && (
+                      <div className="live-badge">
+                        <div className="live-dot"></div>
+                        LIVE
+                      </div>
+                    )}
+                    {raceStatus === 'upcoming' && (
+                      <div className="upcoming-badge">⬆ UPCOMING</div>
+                    )}
+                  </div>
+                  <div className="race-details">
+                    <div className="race-date">{date}</div>
+                    <div className="race-time">🕐 {time}</div>
+                    <div className="race-name">{race.name}</div>
+                    <div className="race-location">📍 {race.location}</div>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  })}
+</div>
+
+            </>
           )}
         </main>
       </div>

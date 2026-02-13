@@ -419,6 +419,28 @@ body {
   margin-bottom: 1rem;
   font-weight: 600;
   letter-spacing: -0.01em;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.month-header-past {
+  opacity: 0.45;
+}
+
+.month-toggle-icon {
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+.month-past {
+  opacity: 0.6;
+}
+
+.month-past .month-header:hover {
+  opacity: 0.85;
 }
 
 [data-theme="dark"] .month-header {
@@ -426,6 +448,10 @@ body {
   font-size: 1.1rem;
   letter-spacing: 0.05em;
   opacity: 0.95;
+}
+
+[data-theme="dark"] .month-header-past {
+  opacity: 0.4;
 }
 
 .races-grid {
@@ -447,6 +473,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
 

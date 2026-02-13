@@ -8,7 +8,7 @@ export const racingSeries = {
   f1: {
     id: 'f1',
     name: 'Formula 1',
-    color: '#E10600',
+    color: '#B00400',
     calUrl: 'https://www.formula1.com/en/racing/2026',
     races: [
       { name: 'Australian Grand Prix', location: 'Melbourne', dateTimeUTC: '2026-03-08T04:00:00Z', timezone: 'Australia/Melbourne' },
@@ -59,7 +59,7 @@ export const racingSeries = {
   wec: {
     id: 'wec',
     name: 'FIA World Endurance Championship',
-    color: '#F77F00',
+    color: '#C46200',
     calUrl: 'https://www.fiawec.com/en/',
     races: [
       { name: '1812km of Qatar', location: 'Lusail', dateTimeUTC: '2026-03-28T13:00:00Z', timezone: 'Asia/Qatar' },
